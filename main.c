@@ -7,7 +7,6 @@
 #include "colaCircular.h"
 #include "pilaEstatica.h"
 
-// Datos de prueba para generar muestras aleatorias
 const char *nombres[] = {"Muestra Quimica", "Muestra Biologica", "Muestra Organica",
                           "Muestra Toxica", "Muestra Acuosa"};
 const char *deptos[] = {"Quimica", "Biologia", "Fisica", "Farmacia", "Ingenieria"};
@@ -29,10 +28,10 @@ Muestra generarMuestra(int clave) {
 
 int contarColaLineal(ColaLineal *cola) {
     int count = 0;
-    Nodo *a = cola->h;
-    while (a != NULL) {
+    Nodo *actual = cola->h;
+    while (actual != NULL) {
         count++;
-        a = a->sig;
+        actual = actual->sig;
     }
     return count;
 }
@@ -40,10 +39,10 @@ int contarColaLineal(ColaLineal *cola) {
 int contarColaCircular(ColaCircular *cola) {
     if (colaCircularVacia(cola)) return 0;
     int count = 1;
-    NodoCir *a = cola->h;
-    while (a->sig!= cola->h) {
+    NodoCir *actual = cola->h;
+    while (actual->sig != cola->h) {
         count++;
-        a = a->sig;
+        actual = actual->sig;
     }
     return count;
 }
@@ -55,11 +54,11 @@ int main() {
     ColaCircular analizadas;
     PilaEstatica entrega;
 
-    inicializarColaCircular(&entrada);
+    inicializarColaLineal(&entrada);
     inicializarColaCircular(&analizadas);
     inicializarPila(&entrega);
 
-    int clave_actual = 100;
+    int claveActual = 100;
 
     while (1) {
         printf("\n==========================================\n");
@@ -70,10 +69,10 @@ int main() {
         printf("\n--- FASE 1: Recepcion de muestras ---\n");
         int aleatorio = rand() % 101;
         if (aleatorio <= 50) {
-            Muestra nueva = generarMuestra(clave_actual++);
+            Muestra nueva = generarMuestra(claveActual++);
             printf("  Llego muestra: Clave %d | %s | Depto: %s\n",
                    nueva.clave, nueva.nombre, nueva.departamento);
-            encolar(&entrada, nueva);
+            insertarColaLineal(&entrada, nueva);
         } else {
             printf("  No llego ninguna muestra.\n");
         }
@@ -88,8 +87,8 @@ int main() {
             int aAnalizar = rand() % (totalEntrada + 1);
             printf("  Muestras a analizar: %d\n", aAnalizar);
             for (int i = 0; i < aAnalizar; i++) {
-                if (!colaLinealVacia(&entrada)) {
-                    Muestra m = eliminarColaCircular(&entrada);
+                if (!colaVaciaLineal(&entrada)) {
+                    Muestra m = eliminarColaLineal(&entrada);
                     printf("  Procesando muestra %d ...\n", m.clave);
                     insertarColaCircular(&analizadas, m);
                     imprimirEstado(&entrada, &analizadas, &entrega);
@@ -111,21 +110,21 @@ int main() {
                     push(&entrega, m);
                 }
             }
-            // Repartidores entregan desde la pila
             int totalPila = entrega.tope + 1;
-            int aRepartir = rand() % (totalPila + 1);
-            printf("  Repartidores entregando %d muestras:\n", aRepartir);
-            for (int i = 0; i < aRepartir; i++) {
-                if (!pilaVacia(&entrega)) {
-                    Muestra m = pop(&entrega);
-                    printf("  La muestra %d se entrego al departamento %s\n",
-                           m.clave, m.departamento);
+            if (totalPila > 0) {
+                int aRepartir = rand() % (totalPila + 1);
+                printf("  Repartidores entregando %d muestras:\n", aRepartir);
+                for (int i = 0; i < aRepartir; i++) {
+                    if (!pilaVacia(&entrega)) {
+                        Muestra m = pop(&entrega);
+                        printf("  La muestra %d se entrego al departamento %s\n",
+                               m.clave, m.departamento);
+                    }
                 }
             }
         }
         imprimirEstado(&entrada, &analizadas, &entrega);
 
-        // Pausa para poder leer la pantalla
         printf("\nPresiona ENTER para continuar...\n");
         getchar();
     }

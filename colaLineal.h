@@ -13,7 +13,7 @@ typedef struct {
     Nodo *t;
 } ColaLineal; //la cola linel es normal
 
-void inicializar_cola(ColaLineal *cola);
+void inicializarColaLineal(ColaLineal *cola);
 void insertarColaLineal(ColaLineal *cola, Muestra m);
 Muestra eliminarColaLineal(ColaLineal *cola);
 int colaVaciaLineal(ColaLineal *cola);
