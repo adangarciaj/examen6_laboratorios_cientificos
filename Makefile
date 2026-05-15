@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 
 # El nombre de tu programa final
-TARGET = simulador_lab
+TARGET = examen6
 
 # Todos los archivos .c que creaste para las estructuras
 SRCS = main.c cola_lineal.c cola_circular.c pila_estatica.c
