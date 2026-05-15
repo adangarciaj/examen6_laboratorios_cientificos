@@ -46,12 +46,16 @@ int colaCircularVacia(ColaCircular *cola) {
 void imprimirColaCircular(ColaCircular *cola) {
     printf("\n=== Muestras analizadas ===\n");
     if (colaCircularVacia(cola)) {
-        printf("La cola está vacía.\n");
-    } else {
-        NodoCir *a = cola->h;
-        do {
-            imprimirMuestra(a->muestra);
-            a = a->sig;
-        } while (a!= cola->h);
+        printf("  [Cola vacía]\n");
+        return;
     }
+    
+    NodoCir *a = cola->h;
+    do {
+        printf("  Clave: %d | Nombre: %s | Depto: %s\n",
+               a->muestra.clave,
+               a->muestra.nombre,
+               a->muestra.departamento);
+        a = a->sig;
+    } while (a != cola->h);
 }
