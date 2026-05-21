@@ -5,13 +5,14 @@
 #include "muestra.h"
 #include "colaLineal.h"
 #include "colaCircular.h"
-#include "pilaEstatica.h"
+#include "pilaDinamica.h" // ¡Cambio de libreria!
 
 const char *nombres[] = {"Muestra Quimica", "Muestra Biologica", "Muestra Organica",
                           "Muestra Toxica", "Muestra Acuosa"};
 const char *deptos[] = {"Quimica", "Biologia", "Fisica", "Farmacia", "Ingenieria"};
 
-void imprimirEstado(ColaLineal *entrada, ColaCircular *analizadas, PilaEstatica *entrega) {
+// ¡Actualizado el tipo de Pila!
+void imprimirEstado(ColaLineal *entrada, ColaCircular *analizadas, PilaDinamica *entrega) {
     imprimirColaLineal(entrada);
     imprimirColaCircular(analizadas);
     imprimirPila(entrega);
@@ -52,7 +53,7 @@ int main() {
 
     ColaLineal entrada;
     ColaCircular analizadas;
-    PilaEstatica entrega;
+    PilaDinamica entrega; // ¡Pila ahora es dinámica!
 
     inicializarColaLineal(&entrada);
     inicializarColaCircular(&analizadas);
@@ -110,7 +111,10 @@ int main() {
                     push(&entrega, m);
                 }
             }
-            int totalPila = entrega.tope + 1;
+            
+            // ¡Cambio aquí! Utilizamos la propiedad cantidad de la pila dinámica
+            int totalPila = entrega.cantidad; 
+            
             if (totalPila > 0) {
                 int aRepartir = rand() % (totalPila + 1);
                 printf("  Repartidores entregando %d muestras:\n", aRepartir);
