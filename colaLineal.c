@@ -7,9 +7,9 @@ void inicializarColaLineal(ColaLineal *cola) {
     cola->t = NULL;
 }
 
-void insertarColaLineal(ColaLineal *cola, Muestra m) { //devuekve una muestra no un dato
+void insertarColaLineal(ColaLineal *cola, Muestra m) { 
     Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
-    nuevo->muestra = m; //es lo mismo que int->dato = dato
+    nuevo->muestra = m; 
     nuevo->sig = NULL;
 
     if (cola->t == NULL) {

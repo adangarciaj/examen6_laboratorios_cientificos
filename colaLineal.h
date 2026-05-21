@@ -4,14 +4,14 @@
 #include "muestra.h"
 
 typedef struct Nodo {
-    Muestra muestra; //en lugar de un int dato, es un typedef muestra
+    Muestra muestra; 
     struct Nodo *sig;
 } Nodo;
 
 typedef struct {
     Nodo *h;
     Nodo *t;
-} ColaLineal; //la cola linel es normal
+} ColaLineal; 
 
 void inicializarColaLineal(ColaLineal *cola);
 void insertarColaLineal(ColaLineal *cola, Muestra m);

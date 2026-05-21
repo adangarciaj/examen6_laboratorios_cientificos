@@ -48,7 +48,7 @@ void imprimirPila(PilaDinamica *pila) {
         return;
     }
     
-    // Recorremos la pila dinámica para imprimir
+    
     NodoPila *actual = pila->tope;
     while (actual != NULL) {
         printf("  Clave: %d | Nombre: %s | Depto: %s\n",

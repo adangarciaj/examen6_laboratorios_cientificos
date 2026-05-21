@@ -5,13 +5,13 @@
 #include "muestra.h"
 #include "colaLineal.h"
 #include "colaCircular.h"
-#include "pilaDinamica.h" // ¡Cambio de libreria!
+#include "pilaDinamica.h" 
 
 const char *nombres[] = {"Muestra Quimica", "Muestra Biologica", "Muestra Organica",
                           "Muestra Toxica", "Muestra Acuosa"};
 const char *deptos[] = {"Quimica", "Biologia", "Fisica", "Farmacia", "Ingenieria"};
 
-// ¡Actualizado el tipo de Pila!
+
 void imprimirEstado(ColaLineal *entrada, ColaCircular *analizadas, PilaDinamica *entrega) {
     imprimirColaLineal(entrada);
     imprimirColaCircular(analizadas);
@@ -53,7 +53,7 @@ int main() {
 
     ColaLineal entrada;
     ColaCircular analizadas;
-    PilaDinamica entrega; // ¡Pila ahora es dinámica!
+    PilaDinamica entrega; 
 
     inicializarColaLineal(&entrada);
     inicializarColaCircular(&analizadas);
@@ -66,7 +66,7 @@ int main() {
         printf("       LABORATORIO CIENTIFICO UNAM        \n");
         printf("==========================================\n");
 
-        // FASE 1 - Recepcion de muestras
+        
         printf("\n--- FASE 1: Recepcion de muestras ---\n");
         int aleatorio = rand() % 101;
         if (aleatorio <= 50) {
@@ -79,7 +79,7 @@ int main() {
         }
         imprimirEstado(&entrada, &analizadas, &entrega);
 
-        // FASE 2 - Procesado y analisis
+        
         printf("\n--- FASE 2: Procesado y analisis ---\n");
         int totalEntrada = contarColaLineal(&entrada);
         if (totalEntrada == 0) {
@@ -97,7 +97,7 @@ int main() {
             }
         }
 
-        // FASE 3 - Reporte y entrega
+        
         printf("\n--- FASE 3: Reporte y entrega ---\n");
         int totalAnalizadas = contarColaCircular(&analizadas);
         if (totalAnalizadas == 0) {
@@ -112,7 +112,7 @@ int main() {
                 }
             }
             
-            // ¡Cambio aquí! Utilizamos la propiedad cantidad de la pila dinámica
+            
             int totalPila = entrega.cantidad; 
             
             if (totalPila > 0) {
